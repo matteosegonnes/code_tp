@@ -7,6 +7,7 @@
 
 List* initialize_list(int x)
 {
+    // initiliaze a list with its first element (no empty list allowed)
 
     List * temp = (List *)malloc(sizeof(List));
     temp -> val = x;
@@ -58,9 +59,9 @@ List * push_front(List *list, int x)
 {
     List * temp = (List *)malloc(sizeof(List));
 
-    List * list2 = deepcopy(list); // chaque sous pointeur a une adresse différente : deepcopy
+    List * list2 = deepcopy(list);  // deepcopy : list2 (-> next)* != temp (-> next)*
 
-    temp = list; // le pointeur lui est différent mais l'objet pointé est le meme : celui qu'on renvoie
+    temp = list;
 
     temp -> val = x;
 
@@ -111,10 +112,7 @@ List * push_back(List * list, int x)
 
 List * fusion(List * liste1, List * liste2)
 {
-    //liste1 et liste2 déja triée et liste_fusion
-
-    
-    //liste1 = liste1 -> next;
+    //liste1 and liste2 already sorted by recursion in tri_fusion
 
     int x1 = liste1 -> val;
     int x2 = liste2 -> val;
@@ -139,15 +137,15 @@ List * fusion(List * liste1, List * liste2)
         if(x<= y)
         {
             liste_fusion = push_back(liste_fusion, x);
-            liste_fusion = push_back(liste_fusion, y);
+            liste1 = liste1 -> next;
         }
         else 
         {
             liste_fusion = push_back(liste_fusion, y);
-            liste_fusion = push_back(liste_fusion, x);
+            liste2 = liste2 -> next;
         }
-        liste1 = liste1 -> next;
-        liste2 = liste2 -> next;
+        
+        
 
     }
     if (liste1 == NULL && liste2 == NULL)
@@ -210,4 +208,13 @@ List * tri_fusion(List * list)
     return fusion(tri_fusion(liste1), tri_fusion(liste2));
 
 
+}
+
+
+void clear(List * list)
+{
+    while(list != NULL)
+    {
+        list = list -> next;
+    }
 }
