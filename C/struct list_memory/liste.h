@@ -8,7 +8,7 @@ definition des types
 
 typedef struct List
 {
-    float val;
+    int val;
     struct List *next;
 }List;
 
@@ -17,12 +17,12 @@ typedef struct List
 definition des prototypes
 */
 
-List* initialize_list();
+List* initialize_list(int x);
 void print(List *list);
-List* push_front(List *list, float x); // change adress memory
-List* push_back(List * list, float x); // keep same adress memory
+List* push_front(List *list, int x); // doesn't change adress memory
+List* push_back(List * list, int x); // same as push_front
 List * fusion( List * liste1, List * liste2); 
-List * tri_fusion( List * list); 
+List * tri_fusion( List * list); // create new list 
 List * deepcopy( List * list);
 void clear(List * list); // free list
 
